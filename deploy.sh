@@ -17,6 +17,6 @@ git add -A
 git commit -m 'deploy'
 
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:nanthony007/pct-decision-tool.git main:gh-pages
+git push -f https://github.com/nanthony007/pct-decision-tool.git master:gh-pages
 
 cd -

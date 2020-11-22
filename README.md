@@ -1,5 +1,8 @@
 # pct-decision-tool
 
+Available at: https://nanthony007.github.io/pct-decision-tool/
+
+
 ## Project setup
 ```
 yarn install
