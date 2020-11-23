@@ -12,7 +12,12 @@
             cols="6"
             class="d-flex justify-content-center align-items-center"
           >
-            <b-button pill variant="primary" @click="current_question -= 1">
+            <b-button
+              pill
+              block
+              variant="primary"
+              @click="current_question -= 1"
+            >
               <b-icon icon="skip-backward-fill"></b-icon>
             </b-button>
           </b-col>
