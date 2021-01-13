@@ -1,11 +1,17 @@
 <template>
   <b-container fluid id="tool" class="pt-5">
     <!-- if questions remain, ask them -->
-    <div v-if="current_question < question_list.length">
+    <div v-if="current_question">
+      <p
+        v-if="this.questions[this.current_question].warning"
+        class="text-center text-warning"
+      >
+        {{ this.questions[this.current_question].warning }}
+      </p>
       <!-- Question component -->
       <question v-bind="selectedQuestion" v-on:increase="handleAnswer" />
 
-      <div v-if="current_question != 0">
+      <div v-if="current_question != 'track'">
         <!-- Back Button -->
         <b-row class="quarter d-flex justify-content-center">
           <b-col
@@ -16,7 +22,7 @@
               pill
               block
               variant="primary"
-              @click="current_question -= 1"
+              @click="current_question = 'track'"
             >
               <b-icon icon="skip-backward-fill"></b-icon>
             </b-button>
@@ -38,49 +44,57 @@ export default {
   name: "DecisionTool",
   data() {
     return {
-      current_question: 0,
-      chosen_answers: [],
-      question_list: [
-        {
+      current_question: "track",
+      chosen_answers: {},
+      questions: {
+        track: {
           number: 1,
           text: "What best describes the patient's disease state?",
-          options: [
-            "LTRI low-acuity",
-            "LTRI high-acuity",
-            "Sepsis low-acuity",
-            "Sepsis high-acuity",
-          ],
+          options: ["LTRI low/moderate-acuity", "LTRI high-acuity or Sepsis"],
         },
-        {
-          number: 2,
-          text: "Is this the first procalcitonin order for this patient?",
-          options: ["Yes", "No"],
-        },
-        {
-          number: 3,
+        low_acuity: {
+          number: 2, // low-moderate acuity
           text:
             "What range does the current procalictonin level fall in? (ng/ml)",
-          options: ["< 0.10", "0.10 - 0.24", "0.25 - 0.50", "> 0.50"],
+          options: [
+            "<0.10 or drop by >90%",
+            "0.10 - 0.24 or drop by >80%",
+            "0.25 - 0.50",
+            ">0.50",
+          ],
         },
-        {
-          number: 4,
+        high_acuity: {
+          number: 2, // high acuity
           text:
-            "If not the first test, what range did the most recent previous procalcitonin level fall in? (ng/ml)",
-          options: ["< 0.10", "0.10 - 0.24", "0.25 - 0.50", "> 0.50"],
+            "What range does the current procalictonin level fall in? (ng/ml)",
+          options: [
+            "<0.25 or drop by >90%",
+            "0.25 - 0.49 or drop by >80%",
+            "0.50 - 0.99",
+            ">1.00",
+          ],
+          warning:
+            "**Algorithm only recommended on Day 2+ for Sepsis patients.***",
         },
-      ],
+      },
     };
   },
   methods: {
     handleAnswer: function (answer) {
       this.chosen_answers[this.current_question] = answer;
-      this.current_question += 1;
+
+      if (answer === "LTRI high-acuity or Sepsis") {
+        this.current_question = "high_acuity";
+      } else if (answer === "LTRI low/moderate-acuity") {
+        this.current_question = "low_acuity";
+      } else {
+        this.current_question = null;
+      }
     },
   },
   computed: {
     selectedQuestion: function () {
-      // will need to add -1 here eventually when add landing/start page
-      return this.question_list[this.current_question];
+      return this.questions[this.current_question];
     },
   },
 };
