@@ -6,16 +6,24 @@
           <small>Result:</small>
           <br />
           <span v-if="processedAnswers.color == 'danger'">
-            <span class="text-danger">{{ processedAnswers.result }}</span>
+            <span class="text-danger"
+              >Antibiotics {{ processedAnswers.result }}</span
+            >
           </span>
           <span v-if="processedAnswers.color == 'warning'">
-            <span class="text-warning">{{ processedAnswers.result }}</span>
+            <span class="text-warning"
+              >Antibiotics {{ processedAnswers.result }}</span
+            >
           </span>
           <span v-if="processedAnswers.color == 'info'">
-            <span class="text-info">{{ processedAnswers.result }}</span>
+            <span class="text-info"
+              >Antibiotics {{ processedAnswers.result }}</span
+            >
           </span>
           <span v-if="processedAnswers.color == 'success'">
-            <span class="text-success">{{ processedAnswers.result }}</span>
+            <span class="text-success"
+              >Antibiotics {{ processedAnswers.result }}</span
+            >
           </span>
         </h3>
         <ul

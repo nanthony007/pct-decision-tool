@@ -2,6 +2,15 @@
   <b-container fluid id="tool" class="pt-5">
     <!-- if questions remain, ask them -->
     <div v-if="current_question">
+      <div v-if="current_question == 'track'" class="text-center">
+        <h3>Procalcitonin-Guided Antibiotic Prescribing Decision Tool</h3>
+        <p>
+          Use this tool to guide antibiotic prescribing for Lower Respiratory
+          Tract Infection (LRTI) and Sepsis patients based on procalcitonin lab
+          values.
+        </p>
+      </div>
+
       <p
         v-if="this.questions[this.current_question].warning"
         class="text-center text-warning"
