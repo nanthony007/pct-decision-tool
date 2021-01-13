@@ -55,13 +55,24 @@
           {{ warning.title.toUpperCase() }}
         </h3>
         <h5 class="text-center">{{ warning.header }}</h5>
-        <ul
-          class="py-0 px-2 my-0 mx-2"
-          v-for="bullet in warning.bullets"
-          :key="bullet.index"
-        >
-          <li>{{ bullet }}</li>
+        <ul>
+          <li>{{ warning.header2 }}</li>
+          <ul
+            class="py-0 px-2 my-0 mx-2"
+            v-for="bullet in warning.bullets"
+            :key="bullet.index"
+          >
+            <li>{{ bullet }}</li>
+          </ul>
         </ul>
+      </b-col>
+    </b-row>
+    <!-- Back Button -->
+    <b-row class="quarter d-flex justify-content-center">
+      <b-col cols="6" class="d-flex justify-content-center align-items-center">
+        <b-button pill block variant="primary" @click="reloadPage()">
+          <b-icon icon="arrow-clockwise"></b-icon> RESTART
+        </b-button>
       </b-col>
     </b-row>
   </b-container>
@@ -94,7 +105,7 @@ export default {
             color: "info",
             messages: [
               "Repeat test every 2-3 days and use algorithm to evaluate discontinuation.",
-              "If PCT rising or not decreasing, consider treatment failure. Consider expanding coverge and further evaluation.",
+              "If PCT rising or not decreasing, consider treatment failure. Consider expanding antibiotic coverage and further evaluation.",
             ],
           },
           fourthRange: {
@@ -102,7 +113,7 @@ export default {
             color: "success",
             messages: [
               "Repeat test every 2-3 days and use algorithm to evaluate discontinuation.",
-              "If PCT rising or not decreasing, consider treatment failure. Consider expanding coverge and further evaluation.",
+              "If PCT rising or not decreasing, consider treatment failure. Consider expanding antibiotic coverage and further evaluation.",
             ],
           },
         },
@@ -111,7 +122,7 @@ export default {
             result: "Strongly Discouraged",
             color: "danger",
             messages: [
-              "Consider alternatie diagnosis.",
+              "Consider alternate diagnosis.",
               "Repeat PCT in 6-24 hours if no clinical imporvement.",
               "If immunosupressed or high risk consider overrule.",
             ],
@@ -120,7 +131,7 @@ export default {
             result: "Discouraged",
             color: "warning",
             messages: [
-              "Consider alternatie diagnosis.",
+              "Consider alternate diagnosis.",
               "Repeat PCT in 6-24 hours if no clinical imporvement.",
               "If immunosupressed or high risk consider overrule.",
             ],
@@ -130,7 +141,7 @@ export default {
             color: "info",
             messages: [
               "Repeat test every 2-3 days and use algorithm to evaluate discontinuation.",
-              "If PCT rising or not decreasing, consider treatment failure. Consider expanding coverge and further evaluation.",
+              "If PCT rising or not decreasing, consider treatment failure. Consider expanding antibiotic coverage and further evaluation.",
             ],
           },
           fourthRange: {
@@ -138,7 +149,7 @@ export default {
             color: "success",
             messages: [
               "Repeat test every 2-3 days and use algorithm to evaluate discontinuation.",
-              "If PCT rising or not decreasing, consider treatment failure. Consider expanding coverge and further evaluation.",
+              "If PCT rising or not decreasing, consider treatment failure. Consider expanding antibiotic coverage and further evaluation.",
             ],
           },
         },
@@ -149,7 +160,7 @@ export default {
         bullets: [
           "Massive stress",
           "Malaria",
-          "systemic vasculitis",
+          "Systemic vasculitis",
           "Agents that stimulate cytokines",
           "End-stage renal disease",
           "Immunocompromised",
@@ -158,14 +169,15 @@ export default {
       warning: {
         title: "Stop",
         header: "Do NOT use PCT for these patients",
-        bullets: [
-          "Chronic infections (including but not limited to):",
-          "Osteomyelitis",
-          "Abscess",
-          "Subacute endocarditis",
-        ],
+        header2: "Chronic infections (including but not limited to):",
+        bullets: ["Osteomyelitis", "Abscess", "Subacute endocarditis"],
       },
     };
+  },
+  methods: {
+    reloadPage() {
+      window.location.reload();
+    },
   },
   computed: {
     processedAnswers: function () {
@@ -174,10 +186,9 @@ export default {
       var selectedTrack = "";
       var selectedRange = "";
 
-      console.log(this.answers);
       // lots of conditional logic
 
-      if (stringTrack === "LTRI high-acuity or Sepsis") {
+      if (stringTrack === "LRTI high-acuity or Sepsis") {
         selectedTrack = "high_acuity";
         stringRange = this.answers.high_acuity;
         if (stringRange === "<0.25 or drop by >90%") {
@@ -189,7 +200,7 @@ export default {
         } else if (stringRange === ">1.00") {
           selectedRange = "fourthRange";
         }
-      } else if (stringTrack === "LTRI low/moderate-acuity") {
+      } else if (stringTrack === "LRTI low/moderate-acuity") {
         selectedTrack = "low_acuity";
         stringRange = this.answers.low_acuity;
         if (stringRange === "<0.10 or drop by >90%") {

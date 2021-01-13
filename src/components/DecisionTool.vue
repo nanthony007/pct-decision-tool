@@ -6,8 +6,8 @@
         <h3>Procalcitonin-Guided Antibiotic Prescribing Decision Tool</h3>
         <p>
           Use this tool to guide antibiotic prescribing for Lower Respiratory
-          Tract Infection (LRTI) and Sepsis patients based on procalcitonin lab
-          values.
+          Tract Infection (LRTI) and Sepsis patients based on procalcitonin
+          (PCT) lab values.
         </p>
       </div>
 
@@ -59,7 +59,7 @@ export default {
         track: {
           number: 1,
           text: "What best describes the patient's disease state?",
-          options: ["LTRI low/moderate-acuity", "LTRI high-acuity or Sepsis"],
+          options: ["LRTI low/moderate-acuity", "LRTI high-acuity or Sepsis"],
         },
         low_acuity: {
           number: 2, // low-moderate acuity
@@ -92,9 +92,9 @@ export default {
     handleAnswer: function (answer) {
       this.chosen_answers[this.current_question] = answer;
 
-      if (answer === "LTRI high-acuity or Sepsis") {
+      if (answer === "LRTI high-acuity or Sepsis") {
         this.current_question = "high_acuity";
-      } else if (answer === "LTRI low/moderate-acuity") {
+      } else if (answer === "LRTI low/moderate-acuity") {
         this.current_question = "low_acuity";
       } else {
         this.current_question = null;
