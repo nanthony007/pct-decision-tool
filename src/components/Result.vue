@@ -79,6 +79,10 @@
 </template>
 
 <script>
+const axios = require("axios");
+const dotenv = require("dotenv");
+dotenv.config();
+
 export default {
   name: "Result",
   props: ["answers"],
@@ -215,11 +219,79 @@ export default {
       } else {
         console.log("BADDD");
       }
-      console.log(selectedTrack);
-      console.log(selectedRange);
+
       // access result from possibleResults using conditional logic
       return this.possibleResults[selectedTrack][selectedRange];
     },
+  },
+  mounted() {
+    var level = "";
+    if (this.answers.track === "LRTI high-acuity or Sepsis") {
+      level = this.answers.high_acuity;
+    } else {
+      level = this.answers.low_acuity;
+    }
+    var url = `https://pct--decision-tool-backend.herokuapp.com/add?track=${this.answers.track}&level=${level}`;
+    axios.get(url);
+    // var d = new Date().toLocaleString();
+    // var newData = {};
+    // newData["timestamp"] = d;
+    // newData["track"] = this.answers.track;
+    // if (this.answers.track === "LRTI high-acuity or Sepsis") {
+    //   newData["range"] = this.answers.high_acuity;
+    // } else {
+    //   newData["range"] = this.answers.low_acuity;
+    // }
+
+    // var fullData = [];
+    // fullData.push(newData);
+    // var dataURL =
+    //   "https://raw.githubusercontent.com/nanthony007/pct-decision-tool/main/data/records.json";
+
+    // var apiURL =
+    //   "https://api.github.com/repos/nanthony007/pct-decision-tool/contents/data/records.json";
+
+    // async function getData() {
+    //   await axios.get(dataURL).then(function (res) {
+    //     res.data.forEach((element) => fullData.push(element));
+    //   });
+    //   console.log(fullData);
+    // }
+    // async function getSha() {
+    //   let temp = "";
+    //   await axios.get(apiURL).then((res) => (temp = res.data.sha));
+    //   return temp;
+    // }
+
+    // async function putData(data, sha_key) {
+    //   console.log(process.env.VUE_APP_GITHUB);
+
+    //   await axios({
+    //     url: apiURL,
+    //     method: "PUT",
+    //     headers: {
+    //       "Access-Control-Allow-Origin": "*",
+    //       "Access-Control-Allow-Methods": "PUT",
+    //       Accept: "application/vnd.github.v3+json",
+    //       Authorization: "token " + process.env.VUE_APP_GITHUB_PERSONAL,
+    //     },
+    //     data: {
+    //       message: "updating data now!",
+    //       content: data,
+    //       sha: sha_key,
+    //       branch: "main",
+    //     },
+    //     withCredentials: true,
+    //   });
+    //   console.log(data, sha_key);
+    //   console.log("done");
+    // }
+
+    // getData().then(
+    //   getSha().then(function (result) {
+    //     putData(fullData, result);
+    //   })
+    // );
   },
 };
 </script>
