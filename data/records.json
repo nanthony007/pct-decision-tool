@@ -1,1 +1,1 @@
-[{"track": "LRTI low/moderate-acuity", "range": "0.25 - 0.50", "timestamp": "2021-01-14 20:23:06.209761-05:00"}, {"track": "LRTI low/moderate-acuity", "range": "0.25 - 0.50", "timestamp": "2021-01-14 20:30:10.075353-05:00"}]
+[{"track": "LRTI low/moderate-acuity", "range": "0.25 - 0.50", "timestamp": "2021-01-14 20:23:06.209761-05:00"}, {"track": "LRTI low/moderate-acuity", "range": "<0.10 or drop by >90%", "timestamp": "2021-01-14 20:28:28.286073-05:00"}, {"track": "LRTI high-acuity or Sepsis", "range": "greater than1.00", "timestamp": "2021-01-14 20:31:01.349356-05:00"}]
