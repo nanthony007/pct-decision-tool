@@ -231,8 +231,10 @@ export default {
     } else {
       level = this.answers.low_acuity;
     }
-    var url = `https://pct--decision-tool-backend.herokuapp.com/add?track=${this.answers.track}&level=${level}`;
-    axios.get(url);
+    var url =
+      "https://pct--decision-tool-backend.herokuapp.com/add" +
+      `?track=${this.answers.track}&level=${level}`;
+    axios.get(encodeURI(url));
     // var d = new Date().toLocaleString();
     // var newData = {};
     // newData["timestamp"] = d;
