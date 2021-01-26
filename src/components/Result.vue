@@ -1,7 +1,7 @@
 <template>
-  <b-container fluid id="tool" class="pt-5">
-    <b-row class="text-center justify-content-center">
-      <b-col cols="6">
+  <b-container fluid>
+    <b-row class="text-left justify-content-left">
+      <b-col>
         <h3>
           <small>Result:</small>
           <br />
@@ -36,17 +36,13 @@
       >
     </b-row>
 
-    <b-row>
+    <b-row class="pt-2">
       <b-col cols="6">
         <h3 class="text-center text-warning">
           {{ caution.title.toUpperCase() }}
         </h3>
-        <h5 class="text-center">{{ caution.header }}</h5>
-        <ul
-          class="py-0 px-2 my-0 mx-2"
-          v-for="bullet in caution.bullets"
-          :key="bullet.index"
-        >
+        <h5 class="text-left">{{ caution.header }}</h5>
+        <ul v-for="bullet in caution.bullets" :key="bullet.index">
           <li>{{ bullet }}</li>
         </ul>
       </b-col>
@@ -54,11 +50,11 @@
         <h3 class="text-center text-danger">
           {{ warning.title.toUpperCase() }}
         </h3>
-        <h5 class="text-center">{{ warning.header }}</h5>
+        <h5 class="text-left">{{ warning.header }}</h5>
         <ul>
           <li>{{ warning.header2 }}</li>
           <ul
-            class="py-0 px-2 my-0 mx-2"
+            class="pl-3"
             v-for="bullet in warning.bullets"
             :key="bullet.index"
           >
@@ -68,7 +64,7 @@
       </b-col>
     </b-row>
     <!-- Back Button -->
-    <b-row class="quarter d-flex justify-content-center">
+    <b-row class="d-flex justify-content-center pt-2">
       <b-col cols="6" class="d-flex justify-content-center align-items-center">
         <b-button pill block variant="primary" @click="reloadPage()">
           <b-icon icon="arrow-clockwise"></b-icon> RESTART
@@ -298,4 +294,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+ul,
+li {
+  padding: 0;
+  margin: 0;
+}
+</style>

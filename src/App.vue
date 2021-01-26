@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="p-4">
     <decision-tool />
   </div>
 </template>
@@ -16,4 +16,7 @@ export default {
 </script>
 
 <style>
+#app {
+  background-image: linear-gradient(white 50%, blue);
+}
 </style>

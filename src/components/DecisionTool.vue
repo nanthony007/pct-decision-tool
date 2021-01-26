@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid id="tool" class="pt-5">
+  <b-container id="tool">
     <!-- if questions remain, ask them -->
     <div v-if="current_question">
       <div v-if="current_question == 'track'" class="text-center">
@@ -112,7 +112,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #tool {
-  background-image: linear-gradient(white 50%, blue);
   height: 100vh;
 }
 .quarter {
